@@ -1,4 +1,4 @@
-var enablePWA = false;
+var enablePWA = true;
 if(enablePWA) {
 	// SERVICE WORKER
 	if('serviceWorker' in navigator) {
