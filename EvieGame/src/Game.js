@@ -346,7 +346,7 @@ class Game extends Phaser.Scene {
 
 		this.input.keyboard.on('keydown', this.handleKey, this);
 
-		this.input.activePointer.on('isDown', this.handleTouch, this)
+		this.input.on('pointerdown', this.handleTouch, this)
         this.cameras.main.fadeIn(250);
 		this.stateStatus = 'playing';
 
@@ -466,7 +466,7 @@ class Game extends Phaser.Scene {
 		//}
 
 	}
-	handleTouch(pointer) {
+	handleTouch(pointer, currentlyOver) {
 		if (pointer.isDown) {
 			var touchX = pointer.x;
 			var touchY = pointer.y;
