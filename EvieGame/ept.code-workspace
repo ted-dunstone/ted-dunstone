@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../phaser3-examples/public/src"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Enclave-Phaser-Template"
+	}
+}
