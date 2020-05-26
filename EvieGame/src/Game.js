@@ -166,8 +166,7 @@ class Animals {
   }
 
 class Game extends Phaser.Scene {
-	game_count = 0
-
+	
     constructor() {
 		super('Game');
 	}
