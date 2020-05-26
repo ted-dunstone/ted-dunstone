@@ -366,7 +366,17 @@ class Game extends Phaser.Scene {
 					self._runOnce = false;
 				}
 		}, this);
-		
+
+		this.cameras.main.zoomTo(4, 3000);
+		this.currentTimer = this.time.addEvent({
+			delay: 3000,
+			callback: function () {
+				this.cameras.main.zoomTo(1.5, 3000);
+			},
+			callbackScope: this,
+			loop: false
+		});
+
 		
 	}
 
@@ -400,11 +410,13 @@ class Game extends Phaser.Scene {
 				animal.tint = 0xff00ff;
 				this.lasso_animal = animal;
 				this.addPoints(animal)
+				this.cameras.main.zoomTo(1.5, 2000);
 			}
 		}
 	}
 	lassoDone(lasso,platform) {
 		this.lasso_thrown = false
+		this.cameras.main.zoomTo(1.5, 2000);
 	}
 
 	update() {
@@ -532,6 +544,7 @@ class Game extends Phaser.Scene {
 						//this.lasso.body.setVelocity({x:320,y:-150});
 						this.lasso.setVelocityX(v1.x*1.5)
 						this.lasso.setVelocityY(-350)
+						this.cameras.main.zoomTo(1, 500);
 					}
 					break;
 				}

@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../phaser3-examples/public/src"
+		},
+		{
+			"path": "../../phaser3-examples/public/src"
 		}
 	],
 	"settings": {

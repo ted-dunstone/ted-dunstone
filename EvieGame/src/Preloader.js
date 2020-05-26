@@ -26,6 +26,7 @@ class Preloader extends Phaser.Scene {
 				['particle', 'img/particle.png']
 			],
 			'spritesheet': [
+				['fullscreen', 'img/fullscreen.png', { frameWidth: 64, frameHeight: 64 }],
 				['animals','img/animals4a.png', {frameWidth:206,frameHeight:140}],
 				['objects','img/objects.png', {frameWidth:200,frameHeight:200}],
 				['horse','img/horse_spritesheet.png', {frameWidth:70,frameHeight:70}],

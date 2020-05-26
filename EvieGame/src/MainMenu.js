@@ -41,6 +41,23 @@ class MainMenu extends Phaser.Scene {
         textHighscore.y = -textHighscore.height-30;
         this.tweens.add({targets: textHighscore, y: 40, duration: 500, delay: 100, ease: 'Back'});
 
+
+        var button = this.add.image(220-16, 24, 'fullscreen', 0).setOrigin(1, 0).setInteractive();
+
+        button.on('pointerup', function () {
+            if (this.scale.isFullscreen)
+            {
+                button.setFrame(0);
+                this.scale.stopFullscreen();
+            }
+            else
+            {
+                button.setFrame(1);
+                this.scale.startFullscreen();
+            }
+        }, this);
+
+
         this.cameras.main.fadeIn(250);
     }
     handleKey(e) {
