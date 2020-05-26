@@ -467,10 +467,14 @@ class Game extends Phaser.Scene {
 
 	}
 	handleTouch(pointer, currentlyOver) {
+		console.log(pointer.y)
+			
 		if (pointer.isDown) {
-			console.log(pointer)
 			var touchX = pointer.x;
 			var touchY = pointer.y;
+			if (touchY<400) {
+				this.handleKey('ArrowUp')
+			}
 			if (touchX<300) {
 				this.handleKey('ArrowLeft')
 			} else if (touchX>EPT.world.width - 300) {
