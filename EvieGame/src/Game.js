@@ -468,6 +468,7 @@ class Game extends Phaser.Scene {
 	}
 	handleTouch(pointer, currentlyOver) {
 		if (pointer.isDown) {
+			console.log(pointer)
 			var touchX = pointer.x;
 			var touchY = pointer.y;
 			if (touchX<300) {
@@ -481,7 +482,10 @@ class Game extends Phaser.Scene {
 	}
 	
     handleKey(e) {
-        switch(e.code) {
+		var code = e 
+		if (Object.prototype.toString.call(e) !== '[object String]')
+			code = e.code
+        switch(code) {
             case 'KeyP': {
                 this.managePause();
                 break;
