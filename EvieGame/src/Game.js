@@ -345,6 +345,8 @@ class Game extends Phaser.Scene {
 		this.physics.add.overlap(this.lasso, this.platforms, this.lassoDone, null, this);
 
 		this.input.keyboard.on('keydown', this.handleKey, this);
+
+		this.input.activePointer.on('isDown', this.handleTouch, this)
         this.cameras.main.fadeIn(250);
 		this.stateStatus = 'playing';
 
@@ -464,6 +466,20 @@ class Game extends Phaser.Scene {
 		//}
 
 	}
+	handleTouch(pointer) {
+		if (pointer.isDown) {
+			var touchX = pointer.x;
+			var touchY = pointer.y;
+			if (touchX<300) {
+				this.handleKey('ArrowLeft')
+			} else if (touchX>EPT.world.width - 300) {
+				this.handleKey('ArrowRight')
+			} else {
+				this.handleKey('Space')
+			}
+		}
+	}
+	
     handleKey(e) {
         switch(e.code) {
             case 'KeyP': {
