@@ -6,7 +6,13 @@ class Boot extends Phaser.Scene {
         this.load.image('background', 'img/background.png');
         this.load.image('logo-enclave', 'img/logo-enclave.png');
         this.load.image('loading-background', 'img/loading-background.png');
-        WebFont.load({ custom: { families: ['Berlin'], urls: ['fonts/BRLNSDB.css'] } });
+        //WebFont.load({ custom: { families: ['Saddlebag-Black'], urls: ['fonts/Saddlebag.css'] } }); //'fonts/Saddlebag.css
+        // WebFont.load({ custom: { families: ['Berlin'], urls: ['fonts/BRLNSDB.css'] } }); //'fonts/Saddlebag.css
+        WebFont.load({
+            google: {
+              families: ['Pacifico']
+            }
+          });
     }
     create() {
         EPT.world = {

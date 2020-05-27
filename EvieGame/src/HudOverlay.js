@@ -10,7 +10,9 @@ class HudOverlay extends Phaser.Scene {
 		this.stateStatus = null;
 		this._gamePaused = false;
         this._runOnce = false;
-        this.afterinit()
+		this.afterinit()
+		this.rain()
+		
     }
 
     afterinit() {
@@ -46,12 +48,12 @@ class HudOverlay extends Phaser.Scene {
         const local_this = this
 		this.ourGame.events.on('addScore', function () {
             console.log("SCORE "+this._score)
-            this.score = this.ourGame._score;
+            this._score = this.ourGame._score;
 			this.textScore.setText(EPT.text['gameplay-score'] + this.ourGame._score);
         }, this);
         this.ourGame.events.on('gameover', function () {
             console.log("gameover hud")
-            this.score = this.ourGame._score;
+            //this._score = this.ourGame._score;
             this.stateGameover()
             //this.destroy()
         }, this);
@@ -203,5 +205,44 @@ class HudOverlay extends Phaser.Scene {
 				}
 			});
 		}
+	}
+
+	rain() {
+		//var particles = this.add.particles('particle');
+
+		var emitter = this.add.particles('rain').createEmitter({
+			x: {min: 0, max: 800},
+			y: -100,
+			speed: { min: 0, max: 100 },
+			angle: { min: 15, max: 40 },
+			scale: { start: 0.1, end: 0.5 },
+			blendMode: 'ADD',
+			active: true,
+			lifespan: 2000,
+			gravityY: 500,
+			quantity: 10
+		});
+		this.time.addEvent({
+			delay: 10000,
+			callback: function () {
+				//console.log(emitter)
+				emitter.visible=!emitter.visible
+			},
+			callbackScope: this,
+			loop: true
+		});
+
+/*
+		var emitter = particles.createEmitter({
+			frame: 'blue',
+			x: {min: 0, max: 800},
+			y: 0 ,
+			lifespan: {min: 100, max: 400},
+			speedY: 1500,
+			scaleY: {min: 1, max:4},
+			scaleX: .01,
+			quantity: {min: 5, max: 15},
+			blendMode: 'LIGHTEN',
+		});*/
 	}
 }

@@ -5,8 +5,8 @@ class Story extends Phaser.Scene {
     create() {
 		this.add.sprite(0, 0, 'background').setOrigin(0,0);
 
-		this.player_choose1 = this.add.sprite(280, 530, 'cowgirl').setScale(0.7)
-		this.player_choose2 = this.add.sprite(570, 530, 'cowboy').setScale(0.7)
+		this.player_choose1 = this.add.sprite(280, 480, 'cowgirl').setScale(0.7)
+		this.player_choose2 = this.add.sprite(570, 480, 'cowboy').setScale(0.7)
 
 		var fontStory = { font: '38px '+EPT.text['FONT'], fill: '#ffde00', stroke: '#000', strokeThickness: 7, align: 'center' };
 		var textStory = this.add.text(EPT.world.centerX, 100, EPT.text['screen-story-howto'], fontStory);

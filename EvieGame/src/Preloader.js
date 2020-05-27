@@ -23,7 +23,9 @@ class Preloader extends Phaser.Scene {
 				['overlay', 'img/overlay.png'],
 				['button-beer', 'img/button-beer.png'],
 				['banner-beer', 'img/banner-beer.png'],
-				['particle', 'img/particle.png']
+				['particle', 'img/particle.png'],
+				['rain', 'img/rain.png'],
+				['sun', 'img/sun.png'],
 			],
 			'spritesheet': [
 				['fullscreen', 'img/fullscreen.png', { frameWidth: 64, frameHeight: 64 }],

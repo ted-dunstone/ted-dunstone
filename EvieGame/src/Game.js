@@ -7,7 +7,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 	  this.setBounce(0.1);
 	  //this.setCollideWorldBounds(true);
 	  this.setScale(0.5); //.refreshBody()
-  
+	  this.body.height=160
 	  //this.setCollideWorldBounds(true)
 	}
   }
@@ -253,6 +253,7 @@ class Game extends Phaser.Scene {
 		this.lasso_animal = null;
 		this.left_home = false;
 
+
 		this.currentTimer = this.time.addEvent({
 			delay: 1000,
 			callback: function () {
@@ -288,7 +289,8 @@ class Game extends Phaser.Scene {
 		this.player1.flipX=true
 
 		this.cameras.main.startFollow(this.player1, true, 0.5, 0.5 )
-	  
+
+		this.sun = this.add.sprite(400, 220, 'sun');
 		
 		this.lasso = new Lasso(this, 400, 100, 'lasso')
 		this.lasso.setScale(0.5);
@@ -367,7 +369,7 @@ class Game extends Phaser.Scene {
 				}
 		}, this);
 
-		this.cameras.main.zoomTo(4, 3000);
+		this.cameras.main.zoomTo(3, 3000);
 		this.currentTimer = this.time.addEvent({
 			delay: 3000,
 			callback: function () {
@@ -420,6 +422,8 @@ class Game extends Phaser.Scene {
 	}
 
 	update() {
+		this.sun.x = this.player1.x+250;
+	
 
 		switch(this.stateStatus) {
 			case 'paused': {

@@ -241,7 +241,7 @@ EPT.Lang = {
   },
   text: {
     'en': {
-      'FONT': 'Berlin',
+      'FONT': 'Pacifico',
       'settings': 'SETTINGS',
       'sound-on': 'Sound: ON',
       'sound-off': 'Sound: OFF',

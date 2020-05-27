@@ -2,8 +2,40 @@ class MainMenu extends Phaser.Scene {
     constructor() {
         super('MainMenu');
     }
+    preload() {
+        this.objects = ['cactus1','cactus2','cactus3','rock1','rock2','house']
+
+		for(var i = 0; i < 6; i++){
+			this.anims.create({
+				key: this.objects[i],
+				frames: this.anims.generateFrameNumbers('objects', { start: i, end: i }),
+				frameRate: 0
+			});
+		}
+    }
+
+    create_static_obj(key, count, y_pos) {
+		var line = new Phaser.Geom.Line(200, y_pos, EPT.world.width, y_pos)
+		
+		var s_obj = this.physics.add.staticGroup({key: key,classType: Phaser.GameObjects.Sprite,frameQuantity: count});
+		s_obj.playAnimation(key);
+		Phaser.Actions.RandomLine(s_obj.getChildren(),line);
+		s_obj.getChildren().forEach(item => {
+			item.body.height = 50;
+			item.y-=Math.random()*20
+			item.setScale(1.0);
+		});
+		s_obj.refresh();
+		return s_obj;
+    }
+    
     create() {
         this.add.sprite(0, 0, 'background').setOrigin(0,0);
+        this.create_static_obj('cactus2',5,360);
+        this.create_static_obj('cactus1',5,420);
+		this.create_static_obj('cactus3',6,490);		
+		this.create_static_obj('rock1',3,520);
+		
 
 		EPT.Storage.initUnset('EPT-highscore', 0);
 		var highscore = EPT.Storage.get('EPT-highscore');
