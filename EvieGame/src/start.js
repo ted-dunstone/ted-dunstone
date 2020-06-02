@@ -15,11 +15,12 @@ if(enablePWA) {
 		});
 	 }
 	// NOTIFICATIONS TEMPLATE
-	Notification.requestPermission().then(function(result) {
-		if(result === 'granted') {
+	Promise.resolve(Notification.requestPermission()).then(function(permission) {
+    		if(permission === 'granted') {
 			exampleNotification();
 		}
 	});
+	
 	function exampleNotification() {
 		var notifTitle = 'Lasso';
 		var notifBody = 'Created by Evie Dunstone';
