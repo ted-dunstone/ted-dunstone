@@ -3,11 +3,11 @@ if(enablePWA) {
 	// SERVICE WORKER
 	//if('serviceWorker' in navigator) {
 	//	navigator.serviceWorker.register('./js/sw.js');
-	//};
+	//};https://ted-dunstone.github.io/ted-dunstone/EvieGame/
 	
 	if ('serviceWorker' in navigator) {
         	window.addEventListener('load', function() {
-            		navigator.serviceWorker.register('src/sw.js').then(function(registration) {
+            		navigator.serviceWorker.register('src/sw.js',{scope: 'https://ted-dunstone.github.io/ted-dunstone/EvieGame/'}).then(function(registration) {
                 	console.log('ServiceWorker registration successful with scope: ', registration.scope);
 		    }, function(err) {
 			console.log('ServiceWorker registration failed: ', err);
