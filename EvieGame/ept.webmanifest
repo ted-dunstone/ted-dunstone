@@ -44,7 +44,7 @@
             "type": "image/png"
         }
     ],
-    "start_url": "/index.html",
+    "start_url": "/ted-dunstone/EvieGame/index.html",
     "display": "fullscreen",
     "theme_color": "#e7e7e7",
     "background_color": "#fdb535"
