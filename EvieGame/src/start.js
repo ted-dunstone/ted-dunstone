@@ -15,7 +15,7 @@ if(enablePWA) {
 		});
 	 }
 	// NOTIFICATIONS TEMPLATE
-	Promise.resolve(Notification.requestPermission()).then(function(permission) {
+	/*Promise.resolve(Notification.requestPermission()).then(function(permission) {
     		if(permission === 'granted') {
 			exampleNotification();
 		}
@@ -31,7 +31,7 @@ if(enablePWA) {
 		}
 		var notif = new Notification(notifTitle, options);
 		setTimeout(exampleNotification, 30000);
-	}
+	}*/
 }
 
 var gameConfig = {
