@@ -1,9 +1,19 @@
 var enablePWA = true;
 if(enablePWA) {
 	// SERVICE WORKER
-	if('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('./js/sw.js');
-	};
+	//if('serviceWorker' in navigator) {
+	//	navigator.serviceWorker.register('./js/sw.js');
+	//};
+	
+	if ('serviceWorker' in navigator) {
+        	window.addEventListener('load', function() {
+            		navigator.serviceWorker.register('./js/sw.js', {scope: '/'}).then(function(registration) {
+                	console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		    }, function(err) {
+			console.log('ServiceWorker registration failed: ', err);
+		    });
+		});
+	 }
 	// NOTIFICATIONS TEMPLATE
 	Notification.requestPermission().then(function(result) {
 		if(result === 'granted') {
