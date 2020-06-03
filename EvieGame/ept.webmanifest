@@ -1,7 +1,7 @@
 {
     "name": "Lasso",
-    "short_name": "EPT",
-    "description": "Mobile template for HTML5 games created using the Phaser game engine.",
+    "short_name": "Lasso",
+    "description": "Lasso the animals",
     "icons": [
         {
             "src": "img/icons/icon-32.png",
@@ -45,7 +45,8 @@
         }
     ],
     "start_url": "/ted-dunstone/EvieGame/index.html",
-    "display": "fullscreen",
+    "display":      "standalone", 
+    "orientation":  "landscape",
     "theme_color": "#e7e7e7",
     "background_color": "#fdb535"
 }
