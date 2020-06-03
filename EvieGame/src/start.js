@@ -1,15 +1,26 @@
-var enablePWA = false;
+var enablePWA = true;
 if(enablePWA) {
 	// SERVICE WORKER
-	if('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('./js/sw.js');
-	};
+	//if('serviceWorker' in navigator) {
+	//	navigator.serviceWorker.register('./js/sw.js');
+	//};https://ted-dunstone.github.io/ted-dunstone/EvieGame/
+	
+	if ('serviceWorker' in navigator) {
+        	window.addEventListener('load', function() {
+            		navigator.serviceWorker.register('sw.js',{scope: '/ted-dunstone/EvieGame/'}).then(function(registration) {
+                	console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		    }, function(err) {
+			console.log('ServiceWorker registration failed: ', err);
+		    });
+		});
+	 }
 	// NOTIFICATIONS TEMPLATE
-	Notification.requestPermission().then(function(result) {
-		if(result === 'granted') {
+	/*Promise.resolve(Notification.requestPermission()).then(function(permission) {
+    		if(permission === 'granted') {
 			exampleNotification();
 		}
 	});
+	
 	function exampleNotification() {
 		var notifTitle = 'Lasso';
 		var notifBody = 'Created by Evie Dunstone';
@@ -20,7 +31,7 @@ if(enablePWA) {
 		}
 		var notif = new Notification(notifTitle, options);
 		setTimeout(exampleNotification, 30000);
-	}
+	}*/
 }
 
 var gameConfig = {
