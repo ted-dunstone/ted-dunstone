@@ -24,7 +24,7 @@ if(enablePWA) {
 		});
 		// Get the modal
 		var modal = document.getElementById('myModal');
-		// Get the <span> element that closes the modal
+		// Get the <span> element that closes the modalgit statu
 		var span = document.getElementsByClassName('close')[0];
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
