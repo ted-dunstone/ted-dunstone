@@ -172,6 +172,8 @@ class Game extends Phaser.Scene {
 	}
 	preload() {
 
+		
+
 		this.anims.create({
 			key: 'left',
 			frames: this.anims.generateFrameNumbers('cowgirl_horse', { start: 0, end: 1 }),
@@ -231,6 +233,7 @@ class Game extends Phaser.Scene {
 			//item.setOffset(0,200);
 			item.y-=Math.random()*20
 			item.setScale(1.0);
+			//item.setScrollFactor({x:0.5});
 			//item.refresh()
 		});
 		//s_obj.body.offset.y = 100;
@@ -239,6 +242,13 @@ class Game extends Phaser.Scene {
 	}
 	
     create() {
+
+		//  The miniCam is 400px wide, so can display the whole world at a zoom of 0.2
+		this.minimap = this.cameras.add(200, 10, 400, 100).setZoom(0.2).setName('mini');
+		this.minimap.setBackgroundColor(0x002244);
+		this.minimap.scrollX = 1600;
+		this.minimap.scrollY = 300;
+		
 		this.world_length=800*10
 		this.level =0;
 		console.log(this.level)
@@ -291,6 +301,7 @@ class Game extends Phaser.Scene {
 		this.cameras.main.startFollow(this.player1, true, 0.5, 0.5 )
 
 		this.sun = this.add.sprite(400, 220, 'sun');
+		this.minimap.ignore(this.sun);
 		
 		this.lasso = new Lasso(this, 400, 100, 'lasso')
 		this.lasso.setScale(0.5);
@@ -369,11 +380,11 @@ class Game extends Phaser.Scene {
 				}
 		}, this);
 
-		this.cameras.main.zoomTo(3, 3000);
+		this.cameras.main.zoomTo(2, 3000);
 		this.currentTimer = this.time.addEvent({
 			delay: 3000,
 			callback: function () {
-				this.cameras.main.zoomTo(1.5, 3000);
+				this.cameras.main.zoomTo(1, 3000);
 			},
 			callbackScope: this,
 			loop: false
@@ -423,6 +434,8 @@ class Game extends Phaser.Scene {
 
 	update() {
 		this.sun.x = this.player1.x+250;
+
+		this.minimap.scrollX = Phaser.Math.Clamp(this.player1.x - 200, 800, 4000);
 	
 
 		switch(this.stateStatus) {

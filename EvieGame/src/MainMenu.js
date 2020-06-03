@@ -23,7 +23,8 @@ class MainMenu extends Phaser.Scene {
 		s_obj.getChildren().forEach(item => {
 			item.body.height = 50;
 			item.y-=Math.random()*20
-			item.setScale(1.0);
+            item.setScale(1.0);
+            //item.setScrollFactor(0.5);
 		});
 		s_obj.refresh();
 		return s_obj;
@@ -34,7 +35,9 @@ class MainMenu extends Phaser.Scene {
         this.create_static_obj('cactus2',5,360);
         this.create_static_obj('cactus1',5,420);
 		this.create_static_obj('cactus3',6,490);		
-		this.create_static_obj('rock1',3,520);
+        this.create_static_obj('rock1',3,520);
+        
+
 		
 
 		EPT.Storage.initUnset('EPT-highscore', 0);

@@ -1,0 +1,10 @@
+@font-face {
+	font-family: 'Berlin';
+	src: url('Saddlebag.eot');
+	src: local('☺'),
+		url('Saddlebag.woff') format('woff'),
+		url('Saddlebag.ttf') format('truetype'),
+		url('Saddlebag.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

@@ -1,0 +1,13 @@
+/* font converted using font-converter.net. thank you! */
+@font-face {
+  font-family: "Stadium1946-Regular";
+  src: url("Stadium1946-Regular.eot"); /* IE9 Compat Modes */
+  src: url("Stadium1946-Regular.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("Stadium1946-Regular.otf") format("opentype"), /* Open Type Font */
+    url("Stadium1946-Regular.svg") format("svg"), /* Legacy iOS */
+    url("Stadium1946-Regular.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("Stadium1946-Regular.woff") format("woff"), /* Modern Browsers */
+    url("Stadium1946-Regular.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}

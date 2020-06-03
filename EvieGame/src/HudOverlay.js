@@ -218,9 +218,9 @@ class HudOverlay extends Phaser.Scene {
 			scale: { start: 0.1, end: 0.5 },
 			blendMode: 'ADD',
 			active: true,
-			lifespan: 2000,
-			gravityY: 500,
-			quantity: 10
+			lifespan: 10000,
+			gravityY: 50,
+			quantity: 1
 		});
 		this.time.addEvent({
 			delay: 10000,
