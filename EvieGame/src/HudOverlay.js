@@ -5,13 +5,13 @@ class HudOverlay extends Phaser.Scene {
     
 	create() {
         this._score = 0;
-        this._level = 0;
+        this._level = 1;
 		this._time = 60;
 		this.stateStatus = null;
 		this._gamePaused = false;
         this._runOnce = false;
 		this.afterinit()
-		this.rain()
+		//this.rain()
 		
     }
 

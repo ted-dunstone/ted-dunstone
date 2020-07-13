@@ -1,10 +1,7 @@
 @font-face {
 	font-family: 'Berlin';
-	src: url('BRLNSDB.eot');
 	src: local('☺'),
-		url('BRLNSDB.woff') format('woff'),
-		url('BRLNSDB.ttf') format('truetype'),
-		url('BRLNSDB.svg') format('svg');
+		url('WesternGrit-Regular.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }

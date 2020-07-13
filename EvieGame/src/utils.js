@@ -10,6 +10,11 @@ EPT.Sfx = {
         if(type == 'sound') {
           EPT.Sfx.sounds = [];
           EPT.Sfx.sounds['click'] = game.sound.add('sound-click');
+          var sounds = ['lasso','horse','cow','throw','camel','bird','buffalo','zebra','yeehaw']
+          for (var i=0; i<sounds.length;i+=1) {
+              EPT.Sfx.sounds[sounds[i]] = game.sound.add(sounds[i]);
+          }
+          //EPT.Sfx.sounds['zebra']=EPT.Sfx.sounds['horse']
         }
         else { // music
           if(!EPT.Sfx.music || !EPT.Sfx.music.isPlaying) {
@@ -241,7 +246,7 @@ EPT.Lang = {
   },
   text: {
     'en': {
-      'FONT': 'Pacifico',
+      'FONT': 'WesternGrit-Regular',
       'settings': 'SETTINGS',
       'sound-on': 'Sound: ON',
       'sound-off': 'Sound: OFF',
@@ -273,12 +278,12 @@ EPT.Lang = {
       'key-return': 'P - return to the game',
       'key-gameover': 'Game over screen',
       'key-try': 'T - try again',
-      'gameplay-score': 'Score: ',
+      'gameplay-score': 'Money: $',
       'gameplay-level': 'Level: ',
       'gameplay-timeleft': 'Time left: ',
       'gameplay-paused': 'PAUSED',
       'gameplay-gameover': 'GAME OVER',
-      'menu-highscore': 'Highscore: ',
+      'menu-highscore': 'Highscore: $',
       'screen-story-howto': 'Lasso: Welcome to the Wild-west. \nGet Ready to Catch Animals!\n\nSelect cowgirl or cowboy?'
     },
     'pl': {

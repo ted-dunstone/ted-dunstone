@@ -26,6 +26,8 @@ class Preloader extends Phaser.Scene {
 				['particle', 'img/particle.png'],
 				['rain', 'img/rain.png'],
 				['sun', 'img/sun.png'],
+				['moon', 'img/moon.png'],
+				['background-night', 'img/background-night.png'],
 			],
 			'spritesheet': [
 				['fullscreen', 'img/fullscreen.png', { frameWidth: 64, frameHeight: 64 }],
@@ -55,7 +57,18 @@ class Preloader extends Phaser.Scene {
 			],
 			'audio': [
 				['sound-click', ['sfx/audio-button.m4a','sfx/audio-button.mp3','sfx/audio-button.ogg']],
-				['music-theme', ['sfx/POL-tunnels-short.m4a','sfx/POL-tunnels-short.mp3','sfx/POL-tunnels-short.ogg']]
+				['horse', ['sfx/horse.wav']],
+				['lasso', ['sfx/lasso.wav']],
+				['throw', ['sfx/throw.mp3']],
+				['bird', ['sfx/vulture.wav']],
+				['yeehaw', ['sfx/yeehaw.mp3']],
+				['cow', ['sfx/cow.wav']],
+				['camel', ['sfx/camel.wav']],
+				['zebra', ['sfx/zebra.wav']],
+				['buffalo', ['sfx/buffalo.wav']],
+				//['music-theme', ['sfx/POL-tunnels-short.m4a','sfx/POL-tunnels-short.mp3','sfx/POL-tunnels-short.ogg']]
+				['music-theme', ['sfx/Western Hero  By Andy Slatter.mp3']]
+
 			]
 		};
 		for(var method in resources) {

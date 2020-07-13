@@ -40,6 +40,7 @@ var appShellFiles = [
   './js/Game.js',
   './js/HudOverlay.js',
   './img/background.png',
+  './img/background-night.png',
   './img/banner-beer.png',
   './img/button-achievements.png',
   './img/button-back.png',

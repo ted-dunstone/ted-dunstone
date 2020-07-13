@@ -14,6 +14,44 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
 class Animal extends Phaser.Physics.Arcade.Sprite {
 	constructor(scene, x, y, texture) {
+
+	  var properties = {zebra: {
+							texture:'zebra',
+							speed: 150,
+							scale: 0.8,
+							points: 10,
+							flying: 0
+						},
+						buffalo: {
+							texture:'buffalo',
+							speed: 120,
+							scale: 0.8,
+							points: 10,
+							flying: 0
+						}, camel: {
+							texture:'camel',
+							speed: 120,
+							scale: 0.8,
+							points: 10,
+							flying: 0
+						},
+						bird:{
+							texture:'bird',
+							speed: 120,
+							scale: 0.8,
+							points: 10,
+							flying: 300
+						},
+						cow:{
+							texture:'cow',
+							speed: 100,
+							scale: 0.8,
+							points: 10,
+							flying: 0
+						}
+					}
+
+
 	  //texture = 'zebra'
 	  super(scene, x, y, texture)
 	  this.animal_name =texture
@@ -36,6 +74,10 @@ class Animal extends Phaser.Physics.Arcade.Sprite {
 		this.body.width=60*this.scale
 		
 		var vel = this.max_speed
+
+		if (this.follow) {
+			vel = 140;
+		}
 			
 		if (this.animal_name=='bird') {
 			this.body.y=300;
@@ -64,8 +106,8 @@ class Animal extends Phaser.Physics.Arcade.Sprite {
 				// if it is following do this
 				if (dist>0) {
 					go_left = false
-					vel = 30
 				}
+				vel = 140
 				
 			}
 			
@@ -181,7 +223,7 @@ class Game extends Phaser.Scene {
 			repeat: -1
 		});
 
-		this.animal_names = ['zebra','buffalo','camel','bird','cow']
+		this.animal_names = ['zebra','camel','buffalo','bird','cow']
 
 		for(var i = 0; i < 5; i++){
 			this.anims.create({
@@ -209,7 +251,7 @@ class Game extends Phaser.Scene {
 		} else {
 		  // load save
 		}
-		this.level = 0
+		this.level = 1
 	
 		// kick off the UI overlay
 		//this.scene.launch('HudOverlay').bringToTop()
@@ -243,17 +285,29 @@ class Game extends Phaser.Scene {
 	
     create() {
 
+		this.world_length=800*10
+		
+
 		//  The miniCam is 400px wide, so can display the whole world at a zoom of 0.2
 		this.minimap = this.cameras.add(200, 10, 400, 100).setZoom(0.2).setName('mini');
 		this.minimap.setBackgroundColor(0x002244);
-		this.minimap.scrollX = 1600;
+		this.minimap.scrollX = this.world_length;
 		this.minimap.scrollY = 300;
 		
-		this.world_length=800*10
-		this.level =0;
+		this.level =1;
 		console.log(this.level)
 		this.cameras.main.setBounds(0, 0, this.world_length,  EPT.world.height);
-        this.add.tileSprite(0, 0, 800*10, EPT.world.height,'background').setOrigin(0,0);
+		
+		this.day = true;
+		if (this.day) {
+			this.background_image = this.add.tileSprite(0, 0, 800*10, EPT.world.height,'background').setOrigin(0,0);
+			this.sun = this.add.sprite(400, 220, 'sun');
+		} else {
+			this.background_image = this.add.tileSprite(0, 0, 800*10, EPT.world.height,'background-night').setOrigin(0,0);
+			this.sun = this.add.sprite(400, 220, 'moon');
+		}
+		this.minimap.ignore(this.sun);
+
         this.stateStatus = null;
         this._score = 0;
         this._time = 60;
@@ -300,11 +354,11 @@ class Game extends Phaser.Scene {
 
 		this.cameras.main.startFollow(this.player1, true, 0.5, 0.5 )
 
-		this.sun = this.add.sprite(400, 220, 'sun');
-		this.minimap.ignore(this.sun);
 		
 		this.lasso = new Lasso(this, 400, 100, 'lasso')
 		this.lasso.setScale(0.5);
+		this.lasso.enable = false;
+		this.lasso.setVisible(false);
 		//this.lasso.body.height=30
 	  	//this.lasso.body.width=30
 	
@@ -401,11 +455,17 @@ class Game extends Phaser.Scene {
 			this.left_home = false
 			this.events.emit('newlevel');
 			this.level +=1;
+
+			console.log(this.level)
 			this.player1.setVelocityX(180);
 			this.player1.flipX=true
 			this.player1.x=60
 			this.lasso_animal = null;
 			this.lasso_thrown = false;
+			if (this.level==2) {
+				this.background_image.setTexture('background-night')
+				this.sun.setTexture('moon')	
+			}
 		}
 		if (this._time<55) {
 			this.left_home = true
@@ -422,20 +482,25 @@ class Game extends Phaser.Scene {
 				this.lasso_thrown=false
 				animal.tint = 0xff00ff;
 				this.lasso_animal = animal;
-				this.addPoints(animal)
 				this.cameras.main.zoomTo(1.5, 2000);
+				console.log(animal.animal_name.toLowerCase())
+				EPT.Sfx.play(animal.animal_name.toLowerCase());
+				setTimeout(function(){EPT.Sfx.play('yeehaw');animal.tint = 0xffffff; }, 500);
+				
 			}
 		}
 	}
 	lassoDone(lasso,platform) {
 		this.lasso_thrown = false
 		this.cameras.main.zoomTo(1.5, 2000);
+		this.lasso.allowGravity = false;
+		this.lasso.setVisible(false);
 	}
 
 	update() {
 		this.sun.x = this.player1.x+250;
 
-		this.minimap.scrollX = Phaser.Math.Clamp(this.player1.x - 200, 800, 4000);
+		this.minimap.scrollX = Phaser.Math.Clamp(this.player1.x - 200, 800, this.world_length-1200);
 	
 
 		switch(this.stateStatus) {
@@ -476,16 +541,26 @@ class Game extends Phaser.Scene {
 		this.line.y2 = this.lasso.y
 
 		if (!this.lasso_thrown) {
-			if (this.lasso_animal===null) 
-				this.tweens.add({targets: this.lasso, 
+			if (this.lasso_animal===null) {
+					this.lasso.enable = false;
+					this.tweens.add({targets: this.lasso, 
 					y: this.player1.y, x:this.player1.x, 
-					duration: 100, ease: 'Linear'});
-			else {
+					duration: 100, ease: 'Linear'
+					//onComplete: function(){lasso.y=player.y;}
+					})
+			} else {
 				this.lasso.x = this.lasso_animal.x
 				this.lasso.y = this.lasso_animal.y
-			}
-			
+				if (Math.abs(this.lasso.x-this.player1.x)<10) {
+					// the animal is close
+					this.lasso_animal.setVisible(false);
+					this.addPoints(this.lasso_animal)
+					setTimeout(function(){EPT.Sfx.play('horse'); }, 200);
+					this.lasso_animal=null
+				}
 		}
+			
+		} 
 		
 		this.graphics.clear();
 		this.graphics.strokeLineShape(this.line);
@@ -555,13 +630,15 @@ class Game extends Phaser.Scene {
 						this.lasso_animal=null;
 						this.lasso.x = this.player1.x
 						this.lasso.y = this.player1.y
+						this.lasso.setVisible(true);
 
 						var v1=this.player1.body.velocity
-						console.log(v1)
 						//this.lasso.body.setVelocity({x:320,y:-150});
 						this.lasso.setVelocityX(v1.x*1.5)
 						this.lasso.setVelocityY(-350)
 						this.cameras.main.zoomTo(1, 500);
+						EPT.Sfx.play('throw');
+						
 					}
 					break;
 				}
@@ -601,7 +678,7 @@ class Game extends Phaser.Scene {
         
         var randX = Phaser.Math.Between(animal.x-30,animal.x+30);
         var randY = Phaser.Math.Between(animal.y-30, animal.y+30);
-		var pointsAdded = this.add.text(randX, randY, '+'+bonus, { font: '48px '+EPT.text['FONT'], fill: '#ffde00', stroke: '#000', strokeThickness: 10 });
+		var pointsAdded = this.add.text(randX, randY, '$'+bonus, { font: '48px '+EPT.text['FONT'], fill: '#ffde00', stroke: '#000', strokeThickness: 10 });
 		pointsAdded.setOrigin(0.5, 0.5);
         this.tweens.add({targets: pointsAdded, alpha: 0, y: randY-50, duration: 1000, ease: 'Linear'});
 
